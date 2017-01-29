@@ -1,16 +1,16 @@
 
-ROOT=File.absolute_path('.')
-
 class ParseFile
 
   # multiline regex
   AMD = /define\(\[(.*?)\]/m
   DYNAMIC = /require\(\[?(.*?)\]?\)/m
 
-  def initialize(file)
+  def initialize(root, file)
+    @root=root
     @content = File.read(file)
+    @dirname=File.dirname(file)
     path = File.absolute_path(file)
-    @moduleName = path.gsub("#{ROOT}/",'').gsub(/\.js$/,'')
+    @moduleName = sanitizeModuleName( path )
 
     @content.gsub!(/\s*/,'')
   end
@@ -29,8 +29,10 @@ class ParseFile
     ret= []
     AMD.match(@content) do |m|
       match=m[1]
-      match = sanitizeModuleName(match)
       ret.concat(match.split(','))
+    end
+    ret.map! do |m| 
+      sanitizeModuleName m
     end
     ret
   end
@@ -46,13 +48,13 @@ class ParseFile
           remaining = m.post_match
           m[1].gsub(/['"]/,'').split(',')
         end
-        matches.map! do |m| 
-          sanitizeModuleName m
-        end
         ret.concat(matches)
       else
         remaining=''
       end
+    end
+    ret.map! do |m| 
+      sanitizeModuleName m
     end
     ret
   end
@@ -62,7 +64,11 @@ class ParseFile
   end
 
   def sanitizeModuleName name
-    name.gsub(/['"]/,'').gsub(/^\.\//,'').gsub(/\.js$/,'')
+    name = name.gsub(/['"]/,'')
+    if name =~ /^\./ then
+      name = File.join(@dirname, name)
+    end
+    name.gsub(/^#{@root}\//,'').gsub(/\.js$/,'')
   end
   
 end
