@@ -5,13 +5,12 @@ class ParseFile
   AMD = /define\(\[(.*?)\]/m
   DYNAMIC = /require\(\[?(.*?)\]?\)/m
 
-  def initialize(root, file)
-    @root=root
+  def initialize(root, file, ignoreList)
+    @root = root
     @content = File.read(file)
     @dirname=File.dirname(file)
-    path = File.absolute_path(file)
-    @moduleName = sanitizeModuleName( path )
-
+    @ignoreList = ignoreList
+    @moduleName = sanitize( "./#{file}" )
     @content.gsub!(/\s*/,'')
   end
 
@@ -32,13 +31,13 @@ class ParseFile
       ret.concat(match.split(','))
     end
     ret.map! do |m| 
-      sanitizeModuleName m
+      sanitize m
     end
     ret
   end
 
   def collectDynamicReferences
-    # we assume multiple "require" statements AFTER the "define" block
+    # we assume multiple "require" statements
     ret=[]
     
     remaining=@content
@@ -54,19 +53,21 @@ class ParseFile
       end
     end
     ret.map! do |m| 
-      sanitizeModuleName m
+      sanitize m
     end
     ret
   end
 
   def getRefs
-    @static + @dynamic 
+    (@static + @dynamic).reject do |m| 
+      @ignoreList.include? m
+    end
   end
 
-  def sanitizeModuleName name
+  def sanitize name
     name = name.gsub(/['"]/,'')
     if name =~ /^\./ then
-      name = File.join(@dirname, name)
+      name = File.absolute_path( File.join(@dirname, name) )
     end
     name.gsub(/^#{@root}\//,'').gsub(/\.js$/,'')
   end
