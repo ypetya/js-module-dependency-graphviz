@@ -30,7 +30,7 @@ end
 
 puts "digraph G {"
   puts 'rankdir="LR"'
-  travel 5 do |file|
+  travel 100 do |file|
     printDeps file
   end
 puts "}"

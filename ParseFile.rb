@@ -10,7 +10,7 @@ class ParseFile
     @content = File.read(file)
     @dirname=File.dirname(file)
     @ignoreList = ignoreList
-    @moduleName = sanitize( "./#{file}" )
+    @moduleName = substitute( "./#{file}" )
     @content.gsub!(/\s*/,'')
   end
 
@@ -31,7 +31,7 @@ class ParseFile
       ret.concat(match.split(','))
     end
     ret.map! do |m| 
-      sanitize m
+      substitute m
     end
     ret
   end
@@ -53,7 +53,7 @@ class ParseFile
       end
     end
     ret.map! do |m| 
-      sanitize m
+      substitute m
     end
     ret
   end
@@ -64,7 +64,7 @@ class ParseFile
     end
   end
 
-  def sanitize name
+  def substitute name
     name = name.gsub(/['"]/,'')
     if name =~ /^\./ then
       name = File.absolute_path( File.join(@dirname, name) )
