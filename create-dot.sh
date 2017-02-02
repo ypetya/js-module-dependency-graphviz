@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
-create-dot.rb > test.dot
+create-dot-by-directory-structure.rb > test.dot
 dot -Tsvg test.dot -O
-chrome test.dot.svg
+#chrome test.dot.svg
+

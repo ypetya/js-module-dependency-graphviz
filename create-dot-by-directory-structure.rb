@@ -3,7 +3,8 @@
 require File.join(File.dirname(__FILE__), 'ParseFile')
 
 ROOT = File.absolute_path('.')
-IGNORELIST= [ 'jquery', 'underscore', 'require', 'lodash' ];
+IGNORELIST= [ 'jquery', 'underscore', 'require', 'lodash', 'backbone' ];
+DEPTH = ARGV[0] || 100
 
 def printDeps(file)
     p=ParseFile.new(ROOT, file, IGNORELIST)
@@ -30,7 +31,7 @@ end
 
 puts "digraph G {"
   puts 'rankdir="LR"'
-  travel 100 do |file|
+  travel DEPTH do |file|
     printDeps file
   end
 puts "}"
