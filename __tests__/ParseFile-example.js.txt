@@ -1,0 +1,9 @@
+define(['AMD1',"AMD2"], function() {
+
+    var commonJs1 = [
+        require('common1/common2'),
+        require('./common2'),
+        require('../common3/common4'),
+        require('common5'),
+        require('./this/ignored')];
+});

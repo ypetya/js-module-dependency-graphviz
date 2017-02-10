@@ -1,0 +1,26 @@
+{
+  "name": "source-deps",
+  "version": "0.0.1",
+  "description": "Utility for displaying and check dependencies in a javascript project",
+  "main": "display.js",
+  "dependencies": {
+    "jest-cli": "^18.1.0"
+  },
+  "devDependencies": {
+    "jest-cli": "^18.1.0"
+  },
+  "scripts": {
+    "test": "jest",
+    "test-debug": "node %NODE_DEBUG_OPTION% ./node_modules/jest-cli/bin/jest.js --runInBand"
+  },
+  "keywords": [
+    "dependency",
+    "graph",
+    "dot",
+    "graphviz",
+    "javascript",
+    "source"
+  ],
+  "author": "Peter Kiss",
+  "license": "ISC"
+}
