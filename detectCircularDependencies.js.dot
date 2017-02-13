@@ -1,7 +1,7 @@
 digraph G {
 	 rankdir="LR"
-	 "display" -> "./command"
-	 "display" -> "./GenerateDOTFile"
+	 "detectCircularDependencies" -> "./command"
+	 "detectCircularDependencies" -> "./DependencyDB"
 	 "./command" -> "./ParseAMDFile"
 	 "./command" -> "./Visitor"
 	 "./ParseAMDFile" -> "fs"
