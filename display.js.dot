@@ -1,0 +1,8 @@
+digraph G {
+	 rankdir="LR"
+	 "display" -> "ParseFile"
+	 "display" -> "GraphDescriptionOutput"
+	 "display" -> "traverseByFollowingDependencies"
+	 "ParseFile" -> "fs"
+	 "ParseFile" -> "path"
+}

@@ -4,8 +4,8 @@ var ParseFile = require('./ParseFile'),
 
 var AMD_ROOT = '.',
     IGNORE_LIST = [],
-    START_FILE = process.argv[1],
-    DISTANCE = Number(process.argv[2] || 5),
+    START_FILE = process.argv[2],
+    DISTANCE = Number(process.argv[3] || 5),
     visited = [];
 
 var out = new GraphDescriptionOutput({
