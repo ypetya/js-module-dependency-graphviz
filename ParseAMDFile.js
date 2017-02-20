@@ -29,7 +29,7 @@ function ParseAMDFile(AMDRoot, file, ignoreList) {
     }
 }
 
-ParseAMDFile.createFileNameFromAMDModuleName = function(amdRoot, moduleName) {
+ParseAMDFile.createFileNameFromAMDModuleName = function (amdRoot, moduleName) {
     return path.join(amdRoot, moduleName + '.js');
 };
 

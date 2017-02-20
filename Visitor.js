@@ -24,7 +24,7 @@ Visitor.prototype.visit = function visit(element) {
         this.visited.push(element);
 
         var dependencies = this.nextFn(element), dependency;
-        if(dependencies.length > 0 ) {
+        if (dependencies.length > 0) {
             for (var i = 0; i < dependencies.length; i++) {
                 dependency = dependencies[i];
 

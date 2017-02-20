@@ -7,7 +7,7 @@ DependencyDB.prototype.detectCircular = function () {
     var moduleName = this.findModuleWithoutDeps();
 
     while (moduleName) {
-        console.log('Removing : ' + moduleName + ' left : ' + this.modules.length);
+        // console.log('Removing module from dependency graph : ' + moduleName + '. Number of modules left : ' + this.modules.length);
         this.remove(moduleName);
         this.removeUnused();
         moduleName = this.findModuleWithoutDeps();
@@ -16,7 +16,7 @@ DependencyDB.prototype.detectCircular = function () {
 
 DependencyDB.prototype.print = function () {
     this.modules.forEach(
-        function(module){
+        function (module) {
             console.log(module.toString());
         });
 };
@@ -25,22 +25,22 @@ DependencyDB.prototype.print = function () {
 DependencyDB.prototype.removeUnused = function () {
     var allDeps = [];
     for (var i = 0; i < this.modules.length; i++) {
-        for( var j=0; j< this.modules[i].deps.length; j++) {
+        for (var j = 0; j < this.modules[i].deps.length; j++) {
             var dep = this.modules[i].deps[j];
-            if(allDeps.indexOf(dep) === -1) {
+            if (allDeps.indexOf(dep) === -1) {
                 allDeps.push(dep);
             }
         }
     }
-    for(i=0;i<allDeps.length;i++){
-        if(!this.hasModule(allDeps[i])){
+    for (i = 0; i < allDeps.length; i++) {
+        if (!this.hasModule(allDeps[i])) {
             this.remove(allDeps[i]);
         }
     }
 };
 
 DependencyDB.prototype.add = function (from, to) {
-    if(from === "") {
+    if (from === "") {
         console.log('parse error.');
         return;
     }

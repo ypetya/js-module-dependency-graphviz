@@ -14,7 +14,7 @@ GenerateDOTFile.prototype.generate = function () {
 GenerateDOTFile.prototype.print = printCb;
 
 function printCb(source, dep) {
-    if(dep) {
+    if (dep) {
         console.log("\t \"" + source + "\" -> \"" + dep + "\"");
     }
 }
