@@ -1,6 +1,6 @@
 {
   "name": "source-deps",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Utility for displaying and check dependencies in a javascript project",
   "main": "display.js",
   "dependencies": {
@@ -13,13 +13,21 @@
     "test": "jest",
     "test-debug": "node %NODE_DEBUG_OPTION% ./node_modules/jest-cli/bin/jest.js --runInBand"
   },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ypetya/js-module-dependency-graphviz.git"
+  },
   "keywords": [
     "dependency",
+    "tree",
     "graph",
+    "draw",
     "dot",
     "graphviz",
     "javascript",
-    "source"
+    "source",
+    "circular",
+    "circular Dependency"
   ],
   "author": "Peter Kiss",
   "license": "ISC"
