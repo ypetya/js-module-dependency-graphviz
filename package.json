@@ -1,6 +1,6 @@
 {
-  "name": "source-deps",
-  "version": "0.0.2",
+  "name": "js-module-dependency-graphviz",
+  "version": "0.0.3",
   "description": "Utility for displaying and check dependencies in a javascript project",
   "main": "display.js",
   "dependencies": {
